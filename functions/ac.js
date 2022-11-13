@@ -80,14 +80,13 @@ async function requestPage(url, standing, data) {
 app.get('/', async (req, res) =>{
     url = 'https://codeforces.com/group/MWSDmqGsZm/contest/219158/standings'
     let standing = 1, page = 1, data = {};
-    let ret = await requestPage(url, standing, data);
+    await requestPage(url, standing, data);
     let handles = [], sheetDataTmp = data['sheetData'];
-    console.log(data["sheetData"]);
     delete data['sheetData'];
     for (const [key, value] of Object.entries(data)) {
         handles.push({handle :key, ac: value.size});
     }
-    return {
+    res.status(200).send({
             statusCode: 200,
             body: JSON.stringify({
             'status': 'OK',
@@ -100,7 +99,7 @@ app.get('/', async (req, res) =>{
                 'contestants': handles
             }
         })
-    }
+    })
 })
 
 module.exports.handler = serverless(app);
