@@ -1,0 +1,23 @@
+{
+  "name": "codeforces-api",
+  "version": "1.0.0",
+  "description": "Getting some data from codeforces.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kareem-Khaled/Codeforces-api.git"
+  },
+  "author": "Kareem_Khaled",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kareem-Khaled/Codeforces-api/issues"
+  },
+  "homepage": "https://github.com/Kareem-Khaled/Codeforces-api#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "serverless-http": "^3.1.0"
+  }
+}
