@@ -77,7 +77,7 @@ async function requestPage(url, standing, data) {
       return getAc(res.data, standing, data);
   })
 }
-app.get('/', async (req, res) =>{
+app.get('/ac', async (req, res) =>{
     url = 'https://codeforces.com/group/MWSDmqGsZm/contest/219158/standings'
     let standing = 1, page = 1, data = {};
     await requestPage(url, standing, data);
