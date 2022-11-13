@@ -79,30 +79,35 @@ async function requestPage(url, standing, data) {
   })
 }
 
-router.get('/', async (req, res) =>{
-    url = 'https://codeforces.com/group/MWSDmqGsZm/contest/219158/standings'
+router.get('/g/:groupId/c/:contestId/l/:listId', async (req, res) =>{
+    let {groupId, contestId, listId} = req.params;
     let standing = 1, page = 1, data = {};
-    let ret = await requestPage(url, standing, data);
+    while(standing){
+        url = `https://codeforces.com/group/${groupId}/contest/${contestId}/standings/page/${page}?list=${listId}&showUnofficial=true`
+        let ret = await requestPage(url, standing, data);
+        if(ret[0] == 0) break;
+        standing = ret[0];
+        data = ret[1];
+        page++;
+    }
     let handles = [], sheetDataTmp = data['sheetData'];
-    console.log(data["sheetData"]);
     delete data['sheetData'];
     for (const [key, value] of Object.entries(data)) {
         handles.push({handle :key, ac: value.size});
     }
-    res.status(200).send({
-        statusCode: 200,
-        body: JSON.stringify({
-          'status': 'OK',
-          'result':{
-              'contest': {
-                  'name': sheetDataTmp['sheet']['name'],
-                  'link': sheetDataTmp['sheet']['link'],
-                  'problems': sheetDataTmp['problems']
-              },
-              'contestants': handles
-          }
-      })
-    });
+    res.status(200).send(
+        {
+            'status': 'OK',
+            'result':{
+                'contest': {
+                    'name': sheetDataTmp['sheet']['name'],
+                    'link': sheetDataTmp['sheet']['link'],
+                    'problems': sheetDataTmp['problems']
+                },
+                'contestants': handles
+            }
+        }
+    );
 })
 
 app.use('/.netlify/functions/ac', router);
