@@ -4,7 +4,6 @@
   "description": "Getting some data from codeforces.",
   "main": "index.js",
   "scripts": {
-    "build": "CI= npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
