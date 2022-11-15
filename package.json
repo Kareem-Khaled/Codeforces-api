@@ -4,9 +4,7 @@
   "description": "Getting some data from codeforces.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/netlify-lambda functions",
-    "build": "CI= npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
