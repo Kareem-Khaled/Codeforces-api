@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/netlify-lambda",
+    "start": "./node_modules/.bin/netlify-lambda functions",
     "build": "CI= npm run build"
   },
   "repository": {
