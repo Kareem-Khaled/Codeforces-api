@@ -32,7 +32,6 @@ async function getDom(url) {
         }
     }).then((res) => {
         const dom = new JSDOM(res.data);
-        console.log(dom.window.document);
         return dom.window.document;
     })
 }
