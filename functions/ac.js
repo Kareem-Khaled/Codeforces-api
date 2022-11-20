@@ -17,8 +17,8 @@ function strip(string) {
     return string.replace(/^\s+|\s+$/g, '');
 }
 
-const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
+import chromium from 'chrome-aws-lambda';
+import puppeteer from 'puppeteer-core';
 
 // to get the dom
 async function getDom(url) {
