@@ -9,7 +9,8 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
 // to request the pgae
-const axios = require('axios');
+// const axios = require('axios');
+const puppeteer = require('puppeteer');
 
 // to remove extra's
 function strip(string) {
@@ -18,11 +19,18 @@ function strip(string) {
 
 // to get the dom
 async function getDom(url) {
-    return axios.get(url)
-    .then((res) => {
-        const dom = new JSDOM(res.data);
-        return dom.window.document;
-    })
+    // return axios.get(url)
+    // .then((res) => {
+    //     const dom = new JSDOM(res.data);
+    //     return dom.window.document;
+    // })
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(url, {waitUntil: 'domcontentloaded'});
+    let data = await page.content();
+    await browser.close();
+    const dom = new JSDOM(data);
+    return dom.window.document;
 }
 
 // get ac solutions for each contestant
