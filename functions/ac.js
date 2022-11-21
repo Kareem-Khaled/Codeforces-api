@@ -18,22 +18,22 @@ function strip(string) {
 
 // to get the dom
 async function getDom(url) {
-    // return axios.get(url)
-    // .then((res) => {
-    //     const dom = new JSDOM(res.data);
-    //     return dom.window.document;
-    // })
-    const API_KEY = 'e4e7dc2ef068a949f0915ee007a50c80'
-    return axios('http://api.scraperapi.com/', {
-        params: {
-            'url': url,
-            'api_key': API_KEY,
-            'render' : true
-        }
-    }).then((res) => {
+    return axios.get(url)
+    .then((res) => {
         const dom = new JSDOM(res.data);
         return dom.window.document;
     })
+    // const API_KEY = 'e4e7dc2ef068a949f0915ee007a50c80'
+    // return axios('http://api.scraperapi.com/', {
+    //     params: {
+    //         'url': url,
+    //         'api_key': API_KEY,
+    //         'render' : true
+    //     }
+    // }).then((res) => {
+    //     const dom = new JSDOM(res.data);
+    //     return dom.window.document;
+    // })
 }
 
 // get ac solutions for each contestant
