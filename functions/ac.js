@@ -73,12 +73,12 @@ const getAc = async(url) => {
                 team = trA[0]['title'];
                 for (let k = 1; k < trA.length; k++){
                     tmp = (trA[k].title.split(' '));
-                    contestants.push(tmp[1]);
+                    contestants.push(tmp[tmp.length - 1]);
                 }
             }
             else{ // it's a contestant 
                 tmp = (tr[1].querySelector('a').title.split(' '));
-                contestants.push(tmp[1]);
+                contestants.push(tmp[tmp.length - 1]);
             }
 
             let tds = standing.rows[i].querySelectorAll('td');
