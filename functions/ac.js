@@ -64,6 +64,7 @@ const getAc = async(url) => {
             let tr = standing.rows[i].querySelectorAll('td'), isTeam = true;
             try{
                 trA = tr[1].querySelector('span').querySelectorAll('a');
+                if(!trA.length) isTeam = false;
             }
             catch{
                 isTeam = false;
