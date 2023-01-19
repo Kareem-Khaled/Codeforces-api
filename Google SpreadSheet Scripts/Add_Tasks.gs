@@ -28,7 +28,7 @@ function Add_Tasks() {
       if(cell.includes(':('))
         cell = cell.slice(0, -2);
       let [a, b] = cell.toString().split(' / ');
-      Logger.log(a);
+      // Logger.log(a);
       if(toSolve.all + (b - a) > maxPro) {
         if(toSolve.all < minPro){
           toSolve.all += (b - a);
@@ -56,7 +56,10 @@ function Add_Tasks() {
     for(let cell of task.sheets){
       newTask += sheetsName[cell] + ', ';
     }
-    newTask = newTask.slice(0, -2) + ')';
+    if(newTask == 'Finish(')
+      newTask = 'Great Job :)';
+    else
+      newTask = newTask.slice(0, -2) + ')';
     finalTasks.push([newTask]);
   }
   TasksSheet.getRange(1, 1, finalHandles.length, 1).setValues(finalHandles);
