@@ -7,7 +7,7 @@ let rankColor = {
   'candidate master': '#9900ff'
 }
 
-function Add_Rate_(){
+function Add_Rate(){
     let sheet = SpreadsheetApp.getActive().getSheetByName("Standing");
     let range = sheet.getRange('A:A');
     let handles = range.getValues();
