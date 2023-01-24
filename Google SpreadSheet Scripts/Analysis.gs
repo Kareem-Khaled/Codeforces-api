@@ -76,5 +76,11 @@ function Analysis(Contestants) {
   }
 
   analysisData.sort(cmp2);
+  
+  let lastRow = AnalysisSheet.getLastRow();
+  if (lastRow > analysisData.length) {
+    AnalysisSheet.deleteRows(analysisData.length + 1, lastRow - analysisData.length);
+  }
+  
   AnalysisSheet.getRange(1, 1, analysisData.length, analysisData[0].length).setValues(analysisData);
 }
