@@ -33,6 +33,8 @@ function Analysis(Contestants) {
     for (let contestant of Contestants) {
       analysisData.push([contestant.handle, 0]);
     }
+    Clear(AnalysisSheet, analysisData);
+    analysisData.sort(cmp2);
     AnalysisSheet.getRange(1, 1, analysisData.length, analysisData[0].length).setValues(analysisData);
     return;
   }
@@ -77,10 +79,7 @@ function Analysis(Contestants) {
 
   analysisData.sort(cmp2);
   
-  let lastRow = AnalysisSheet.getLastRow();
-  if (lastRow > analysisData.length) {
-    AnalysisSheet.deleteRows(analysisData.length + 1, lastRow - analysisData.length);
-  }
+  Clear(AnalysisSheet, analysisData);
   
   AnalysisSheet.getRange(1, 1, analysisData.length, analysisData[0].length).setValues(analysisData);
 }
