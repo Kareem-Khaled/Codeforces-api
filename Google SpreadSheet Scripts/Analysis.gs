@@ -78,9 +78,7 @@ function Analysis(Contestants) {
     analysisData.push(tmpArray);
   }
 
-  analysisData.sort(cmp2);
-  
   Clear(AnalysisSheet, analysisData);
-  
+  analysisData.sort(cmp2);
   AnalysisSheet.getRange(1, 1, analysisData.length, analysisData[0].length).setValues(analysisData);
 }
