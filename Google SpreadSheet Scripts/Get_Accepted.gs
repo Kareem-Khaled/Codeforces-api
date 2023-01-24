@@ -57,6 +57,8 @@ function Get_Accepted() {
   if (lastRow > StandingData.length) {
     StandingSheet.deleteRows(StandingData.length + 1, lastRow - StandingData.length);
   }
+
+  Clear(StandingSheet, StandingData);
   StandingSheet.getRange(1, 1, StandingData.length, StandingData[0].length).setValues(StandingData);
 
   Add_Rate();
