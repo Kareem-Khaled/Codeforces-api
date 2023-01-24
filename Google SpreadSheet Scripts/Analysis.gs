@@ -71,7 +71,7 @@ function Analysis(Contestants) {
   for (const [handle, value] of Object.entries(AnalysisObj)) {
     let tmpArray = Array(lastColumn).fill('#NULL');
     tmpArray[0] = handle;
-    tmpArray.push(value);
+    tmpArray.push(0);
     analysisData.push(tmpArray);
   }
 
