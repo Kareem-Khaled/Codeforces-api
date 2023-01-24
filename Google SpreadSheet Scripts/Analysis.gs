@@ -28,7 +28,7 @@ function Analysis(Contestants) {
   let analysisData = AnalysisSheet.getDataRange().getValues();
   let standingData = StandingSheet.getDataRange().getValues();
 
-  if (standingData.length == 1) {
+  if (analysisData[0].length == 1) {
     analysisData = [['Handle \\ Date', GetDate()]];
     for (let contestant of Contestants) {
       analysisData.push([contestant.handle, 0]);
