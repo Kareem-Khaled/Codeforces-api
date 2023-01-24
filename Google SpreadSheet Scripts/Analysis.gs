@@ -56,6 +56,7 @@ function Analysis(Contestants) {
   let curDate = GetDate();
 
   if (curDate != convertDate(analysisData[0][lastColumn])) { // new day
+    lastColumn++;
     analysisData[0].push(curDate);
     for (let row = 1; row < analysisData.length; row++) {
       analysisData[row].push(0);
