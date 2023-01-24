@@ -52,7 +52,7 @@ function Analysis(Contestants) {
     AnalysisObj[handle] -= lastTotalAccepted;
   }
 
-  const lastColumn = AnalysisSheet.getLastColumn() - 1;
+  let lastColumn = AnalysisSheet.getLastColumn() - 1;
   let curDate = GetDate();
 
   if (curDate != convertDate(analysisData[0][lastColumn])) { // new day
