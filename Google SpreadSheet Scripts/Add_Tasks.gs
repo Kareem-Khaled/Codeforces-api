@@ -62,6 +62,7 @@ function Add_Tasks() {
       newTask = newTask.slice(0, -2) + ')';
     finalTasks.push([newTask]);
   }
+  Clear(TasksSheet, finalTasks);
   TasksSheet.getRange(1, 1, finalHandles.length, 1).setValues(finalHandles);
   TasksSheet.getRange(1, 2, finalTasks.length, 1).setValues(finalTasks);
   TasksSheet.getRange('c1:c1').setValue('Deadline');
