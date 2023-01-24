@@ -48,6 +48,8 @@ function Analysis(Contestants) {
 
   for (let row = 1; row < standingData.length; row++) {
     let handle = standingData[row][0];
+    if(!(handle in AnalysisObj))
+      continue;
     let lastTotalAccepted = standingData[row][1];
     AnalysisObj[handle] -= lastTotalAccepted;
   }
@@ -65,6 +67,10 @@ function Analysis(Contestants) {
 
   for (let row = 1; row < analysisData.length; row++) { // add new ac
     let handle = analysisData[row][0];
+     if(!(handle in AnalysisObj)){
+      analysisData.splice(row--, 1);
+      continue;
+    }
     let val = parseInt(analysisData[row][lastColumn]) + AnalysisObj[handle];
     analysisData[row][lastColumn] = val;
     delete AnalysisObj[handle];
