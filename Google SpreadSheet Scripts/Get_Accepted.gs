@@ -53,6 +53,10 @@ function Get_Accepted() {
 
   Analysis(Contestants);
 
+  let lastRow = StandingSheet.getLastRow();
+  if (lastRow > StandingData.length) {
+    StandingSheet.deleteRows(StandingData.length + 1, lastRow - StandingData.length);
+  }
   StandingSheet.getRange(1, 1, StandingData.length, StandingData[0].length).setValues(StandingData);
 
   Add_Rate();
