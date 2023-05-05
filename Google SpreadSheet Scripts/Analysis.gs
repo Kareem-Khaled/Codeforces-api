@@ -21,6 +21,31 @@ function cmp2(a, b) {
   return (a[0] < b[0] ? -1 : 1); // handle's links
 }
 
+function calculate_average(data) {
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    let sum = 0, count = 0;
+    for (let j = 2; j < row.length; j++) {
+      if (typeof row[j] === "number" && !isNaN(row[j])) {
+        sum += row[j];
+        count++;
+      }
+    }
+    const avg = (count > 0 ? parseFloat((sum / count).toFixed(1)) : 0);
+    data[i][1] = avg;
+  }
+  count = data[0].length - 2;
+  data[0][1] = `Average: ${count} Days`;
+}
+
+function reverse_data(data) {
+  for (let i = 0; i < data.length; i++) {
+    const row = data[i];
+    const reversedRow = row.slice(2).reverse();
+    data[i] = [row[0], row[1]].concat(reversedRow);
+  }
+}
+
 function Analysis(Contestants) {
   let AnalysisSheet = SpreadsheetApp.getActive().getSheetByName('Analysis');
   let StandingSheet = SpreadsheetApp.getActive().getSheetByName('Standing');
@@ -28,10 +53,10 @@ function Analysis(Contestants) {
   let analysisData = AnalysisSheet.getDataRange().getValues();
   let standingData = StandingSheet.getDataRange().getValues();
 
-  if (analysisData[0].length == 1) {
-    analysisData = [['Handle \\ Date', GetDate()]];
+  if (standingData.length == 1) {
+    analysisData = [['Handle \\ Date', 'Average: 1 Day', GetDate()]];
     for (let contestant of Contestants) {
-      analysisData.push([contestant.handle, 0]);
+      analysisData.push([contestant.handle, 0, 0]);
     }
     Clear(AnalysisSheet, analysisData);
     analysisData.sort(cmp2);
@@ -53,7 +78,7 @@ function Analysis(Contestants) {
     let lastTotalAccepted = standingData[row][1];
     AnalysisObj[handle] -= lastTotalAccepted;
   }
-
+  reverse_data(analysisData);
   let lastColumn = AnalysisSheet.getLastColumn() - 1;
   let curDate = GetDate();
 
@@ -67,7 +92,7 @@ function Analysis(Contestants) {
 
   for (let row = 1; row < analysisData.length; row++) { // add new ac
     let handle = analysisData[row][0];
-     if(!(handle in AnalysisObj)){
+    if(!(handle in AnalysisObj)){
       analysisData.splice(row--, 1);
       continue;
     }
@@ -86,5 +111,7 @@ function Analysis(Contestants) {
 
   Clear(AnalysisSheet, analysisData);
   analysisData.sort(cmp2);
+  calculate_average(analysisData);
+  reverse_data(analysisData);
   AnalysisSheet.getRange(1, 1, analysisData.length, analysisData[0].length).setValues(analysisData);
 }
